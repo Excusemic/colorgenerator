@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import Values from "values.js"
 import Colorgenerator from "./Colorgenerator"
 
@@ -6,6 +6,7 @@ const Color = () => {
   const [color, setColor] = useState("")
   const [allColors, setAllColors] = useState("")
   const [isError, setIsError] = useState(false)
+  const inputRef = useRef(null)
   const handleChange = (e) => {
     setColor(e.target.value)
   }
@@ -22,6 +23,7 @@ const Color = () => {
     }
   }
   useEffect(() => {
+    inputRef.current.focus()
     const placeholder = new Values("#eb8c34").all(10)
     setAllColors(placeholder)
   }, [])
@@ -37,6 +39,7 @@ const Color = () => {
           onChange={handleChange}
           className={isError ? "error" : null}
           placeholder="#eb8c34"
+          ref={inputRef}
         />
 
         <input type="submit" value="Submit" />
